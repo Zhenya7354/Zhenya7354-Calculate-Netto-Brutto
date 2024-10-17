@@ -1,0 +1,62 @@
+﻿ @model Lab_1._IO.Models.Product
+@{
+    ViewData["Title"] = "Calculate";
+}
+
+<h1>Calculate</h1>
+
+<style>
+    table {
+        border-collapse: collapse; 
+        width: 100%; 
+    }
+
+    th, td {
+        border: 1px solid black; 
+        padding: 8px; 
+        text-align: left; 
+    }
+
+    th {
+        background-color: #f2f2f2; 
+    }
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Quantity</th>
+            <th>Unit Netto Price</th>
+            <th>Vat Rate</th>
+            <th>Individual Discount</th>
+            <th>Retail Customer</th>
+            <th>Price Netto</th>
+            <th>Price Brutto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Title</td>
+            <td>@Model.Quantity</td>
+            <td>@Model.UnitNettoPrice</td>
+            <td>@Model.VAT %</td>
+            <td>@Model.IndividualDiscount %</td>
+            <td>
+                @if (@Model.IsRetailCustomer)
+                {
+                    <span>Yes</span>
+                }
+                else
+                {
+                    <span>No</span>
+                }
+            </td>
+            <td>@ViewBag.TotalNettoPrice</td>
+            <td>@ViewBag.TotalBruttoPrice</td>
+        </tr>
+    </tbody>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Return to Home Page</a>
+</div>

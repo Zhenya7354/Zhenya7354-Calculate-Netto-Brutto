@@ -1,0 +1,78 @@
+﻿@model Lab_1._IO.Models.Product
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        Algorytm obliczający cenę netto
+        i brutto danego towaru
+    </h1>
+    
+</div>
+<form asp-controller="Home" asp-action="Calculate">
+    <fieldset class="border p-4 rounded">
+        <legend class="h5">Product</legend>
+
+        
+        <div class="form-group mb-3">
+            <label asp-for="Title" class="form-label">Select Product</label>
+            <select asp-for="Title" class="form-select" required>
+                <option value="" selected disabled>Not selected</option>
+                <option value="Dress">Dress</option>
+                <option value="Blouse">Blouse</option>
+                <option value="Hat">Hat</option>
+                <option value="Shoes">Shoes</option>
+            </select>
+        </div>
+
+        
+        <div class="form-group mb-3">
+            <label asp-for="UnitNettoPrice" class="form-label">Unit Netto Price</label>
+            <input asp-for="UnitNettoPrice" class="form-control" type="number" placeholder="Enter price" required />
+        </div>
+
+        
+        <div class="form-group mb-3">
+            <label asp-for="Quantity" class="form-label">Quantity</label>
+            <input asp-for="Quantity" class="form-control" type="number" placeholder="Enter quantity" required />
+        </div>
+
+        
+        <div class="form-group mb-3">
+            <label asp-for="VAT" class="form-label">Vat Rate</label>
+            <input asp-for="VAT" class="form-control" type="number" placeholder="Enter VAT rate" required />
+        </div>
+
+       
+        <div class="form-group mb-3">
+            <legend class="h6">Do you have Individual Discount?</legend>
+            <div class="form-check">
+                <input id="Yes" name="IndividualDiscount" class="form-check-input" type="radio" value="10" />
+                <label for="Yes" class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check">
+                <input id="No" name="IndividualDiscount" class="form-check-input" type="radio" value="0" />
+                <label for="No" class="form-check-label">No</label>
+            </div>
+        </div>
+
+        
+        <div class="form-group mb-3">
+            <legend class="h6">Are you Retail Customer?</legend>
+            <div class="form-check">
+                <input id="YesRetail" name="IsRetailCustomer" class="form-check-input" type="radio" value="true" />
+                <label for="YesRetail" class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check">
+                <input id="NoRetail" name="IsRetailCustomer" class="form-check-input" type="radio" value="false" />
+                <label for="NoRetail" class="form-check-label">No</label>
+            </div>
+        </div>
+
+        
+        <div class="form-group mt-4">
+            <button class="btn btn-primary" type="submit">Calculate</button>
+        </div>
+    </fieldset>
+</form>
