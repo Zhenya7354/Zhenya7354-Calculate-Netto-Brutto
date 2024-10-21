@@ -19,10 +19,18 @@ namespace Lab_1._IO.Controllers
 
         public IActionResult Calculate(Product product)
         {
-            decimal DiscountedNettoPrice = product.UnitNettoPrice * (1 - product.IndividualDiscount / 100);
-
+            decimal DiscountedNettoPrice = 0;
+            if (product.IndividualDiscount == 10)
+            {
+                 DiscountedNettoPrice = product.UnitNettoPrice * (1 - product.IndividualDiscount / 100);
+            }
+            else
+            {
+                 DiscountedNettoPrice = product.UnitNettoPrice;
+            }
             if(product.Quantity > 100)
             {
+                product.QuantityDiscount = 2;
                 DiscountedNettoPrice *= (1 - product.QuantityDiscount / 100);
             }
 
@@ -32,12 +40,12 @@ namespace Lab_1._IO.Controllers
             if(product.IsRetailCustomer)
             {
                 // Для роздрібного клієнта ПДВ обчислюється від брутто
-                TotaBruttoPrice = TotalNettoPrice * (1 + product.VAT / 100);
+                TotaBruttoPrice = TotalNettoPrice / (1 - product.VAT / 100);
             }
             else
             {
                 // Для інституційного клієнта ПДВ обчислюється від нетто
-                TotaBruttoPrice = TotalNettoPrice * (TotalNettoPrice * product.VAT / 100);
+                TotaBruttoPrice = TotalNettoPrice * (1 + product.VAT / 100);
             }
             ViewBag.TotalNettoPrice = TotalNettoPrice;
             ViewBag.TotalBruttoPrice = TotaBruttoPrice;
